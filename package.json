@@ -1,7 +1,7 @@
 {
   "name": "url-masker",
   "version": "1.0.2",
-  "description": "A Package for adding an extra url with ur own prefix to any URL using MongoDB.",
+  "description": "A Package for adding an extra url with your own prefix to any URL using MongoDB.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
