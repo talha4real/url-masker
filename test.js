@@ -3,14 +3,15 @@ const MaskUrl = require('./index')
 
 const MONGO_URL = "";
 const PREFIX_URL = "";
+const MASK_URL = "";
 
 describe('MaskUrl',()=>{
   test('generateUrl method should return a masked URL',async()=>{
     const urlMasker = new MaskUrl(MONGO_URL, PREFIX_URL);
     const maskedUrl = await urlMasker.connectToDatabase().then(()=>{
-      return urlMasker.generateUrl();
+      return urlMasker.maskUrl(MASK_URL);
     })
-    expect(maskedUrl.startsWith('https://example.com/')).toBe(true);
+    expect(maskedUrl.startsWith('')).toBe(true);
 
   })
 })

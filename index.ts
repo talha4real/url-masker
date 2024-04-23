@@ -24,18 +24,20 @@ export default class MaskUrl {
     }
   }
 
-  generateUrl(): string {
+  maskUrl(url: string): string {
     if (this.connection) {
         const uniqueId = generateUniqueId();
         const redirectionUrl = `${this.urlPrefix.trim()}/${uniqueId}`;
         const connection = this.connection as mongoose.Connection;
         const UrlModel = connection.model('Url', new mongoose.Schema({
             id: String,
+            prefix: String,
             url: String,
         }));
         const newUrl = new UrlModel({
             id: uniqueId,
-            url: redirectionUrl,
+            prefix: this.urlPrefix,
+            url: url,
         });
 
         newUrl.save();

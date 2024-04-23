@@ -1,6 +1,6 @@
 # URL Masker
 
-A package for adding an extra URL with your own prefix to any URL using MongoDB.
+A package for adding an extra URL to provided with your own prefix using MongoDB.
 
 ## Installation
 
@@ -25,7 +25,7 @@ Next, connect to the MongoDB database:
 ```bash
 urlMasker.connectToDatabase()
   .then(() => {
-    console.log(urlMasker.generateUrl());
+    console.log(urlMasker.urlMasker(<URL_TO_MASK>));
 }).catch((error) => {
     console.error("Error connecting to the database:", error);
 });
