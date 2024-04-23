@@ -31,6 +31,9 @@ urlMasker.connectToDatabase()
 });
 ```
 
+## TO-DO
+To make this fully work you will have to deploy this on a server with your domain which will redirect to the url.
+
 ## License
 This project is licensed under the MIT License
 
