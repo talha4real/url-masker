@@ -31,7 +31,7 @@ urlMasker.connectToDatabase()
 });
 ```
 
-Once you have your URL, you can simple use the new URL to fetch the Old url.
+Once you have your new URL, you can simple use the new URL to fetch the Old url.
 ```bash
 urlMasker.fetchUrl(<Masked_URL>);
 ```
