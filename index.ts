@@ -8,6 +8,7 @@ export default class MaskUrl {
   dbString: string;
   urlPrefix: string;
   connection!: Connection | Error;
+  database!: Database;
 
 
   constructor(dbString: string, urlPrefix: string) {
@@ -16,41 +17,32 @@ export default class MaskUrl {
   }
   async connectToDatabase(): Promise<void> {
     try {
-      const database = new Database(this.dbString);
-      this.connection = await database.connect();
+      this.database = new Database(this.dbString);
+      this.connection = await this.database.connect();
       console.log("db connected")
     } catch (error) {
         throw error;
     }
   }
 
-
-  
-
   generateUrl(): string {
     if (this.connection) {
         const uniqueId = generateUniqueId();
         const redirectionUrl = `${this.urlPrefix.trim()}/${uniqueId}`;
-
         const connection = this.connection as mongoose.Connection;
-
-        const UrlModel = connection.model('Url');
+        const UrlModel = connection.model('Url', new mongoose.Schema({
+            id: String,
+            url: String,
+        }));
         const newUrl = new UrlModel({
             id: uniqueId,
             url: redirectionUrl,
         });
 
-        newUrl.save()
-            .then((result:any) => {
-            console.log('Document saved successfully:', result);
-        })
-            .catch((error:any) => {
-            console.error('Error saving document:', error);
-        });
+        newUrl.save();
 
       return redirectionUrl;
     } else {
-        this.generateUrl()
       throw new Error('Database connection is not established');
     }
   }

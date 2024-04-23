@@ -18,7 +18,6 @@ class MaskUrl {
     constructor(dbString, urlPrefix) {
         this.dbString = dbString;
         this.urlPrefix = urlPrefix;
-        this.connectToDatabase();
     }
     connectToDatabase() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -31,9 +30,6 @@ class MaskUrl {
                 throw error;
             }
         });
-    }
-    get dbsString() {
-        return this.dbString;
     }
     generateUrl() {
         if (this.connection) {
