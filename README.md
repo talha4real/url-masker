@@ -7,7 +7,7 @@ A package for adding an extra URL with your own prefix to any URL using MongoDB.
 You can install the package via npm:
 
 ```bash
-npm install @talha4real/url-masker
+npm install url-masker
 ```
 
 ## Usage
