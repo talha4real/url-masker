@@ -31,6 +31,12 @@ urlMasker.connectToDatabase()
 });
 ```
 
+Once you have your URL, you can simple use the new URL to fetch the Old url.
+```bash
+urlMasker.fetchUrl(<Masked_URL>);
+```
+
+
 ## TO-DO
 To make this fully work you will have to deploy this on a server with your domain which will redirect to the url.
 
