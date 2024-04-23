@@ -1,45 +1,56 @@
 import {generateUniqueId} from './helpers/util';
 import Database from './helpers/db';
-import {Schema} from 'mongoose'
+import mongoose,{Schema,Connection} from 'mongoose'
 
 
 
 export default class MaskUrl {
   dbString: string;
   urlPrefix: string;
-  db: Database;
+  connection!: Connection | Error;
+
 
   constructor(dbString: string, urlPrefix: string) {
     this.dbString = dbString;
     this.urlPrefix = urlPrefix;
-    this.db = new Database(dbString);
-    this.db.connect();
   }
+  async connectToDatabase(): Promise<void> {
+    try {
+      const database = new Database(this.dbString);
+      this.connection = await database.connect();
+      console.log("db connected")
+    } catch (error) {
+        throw error;
+    }
+  }
+
 
   
 
   generateUrl(): string {
-    if (this.db.connection) {
-      const uniqueId = generateUniqueId();
-      const redirectionUrl = `${this.urlPrefix.trim()}/${uniqueId}`;
-      const UrlModel = this.db.UrlModel;
+    if (this.connection) {
+        const uniqueId = generateUniqueId();
+        const redirectionUrl = `${this.urlPrefix.trim()}/${uniqueId}`;
 
-      // Create a new document using the UrlModel
-      const newUrl = new UrlModel({
-        id: uniqueId,
-        url: redirectionUrl,
-      });
+        const connection = this.connection as mongoose.Connection;
 
-      newUrl.save()
-        .then((result:any) => {
-          console.log('Document saved successfully:', result);
+        const UrlModel = connection.model('Url');
+        const newUrl = new UrlModel({
+            id: uniqueId,
+            url: redirectionUrl,
+        });
+
+        newUrl.save()
+            .then((result:any) => {
+            console.log('Document saved successfully:', result);
         })
-        .catch((error:any) => {
-          console.error('Error saving document:', error);
+            .catch((error:any) => {
+            console.error('Error saving document:', error);
         });
 
       return redirectionUrl;
     } else {
+        this.generateUrl()
       throw new Error('Database connection is not established');
     }
   }
