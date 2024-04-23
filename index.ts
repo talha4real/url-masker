@@ -19,7 +19,6 @@ export default class MaskUrl {
     try {
       this.database = new Database(this.dbString);
       this.connection = await this.database.connect();
-      console.log("db connected")
     } catch (error) {
         throw error;
     }

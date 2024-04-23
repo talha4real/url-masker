@@ -1,15 +1,15 @@
 {
-  "name": "@talha4real/first-test-package",
-  "version": "1.0.6",
-  "description": "",
+  "name": "url-masker",
+  "version": "1.0.1",
+  "description": "A Package for adding an extra url with ur own prefix to any URL using MongoDB.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest --detectOpenHandles",
     "build": "tsc"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["url-mask, urlmasker, changeurl, url"],
+  "author": "talha4real",
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^29.5.12",
