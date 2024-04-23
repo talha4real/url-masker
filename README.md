@@ -26,10 +26,9 @@ Next, connect to the MongoDB database:
 urlMasker.connectToDatabase()
   .then(() => {
     console.log(urlMasker.generateUrl());
-  })
-  .catch((error) => {
+}).catch((error) => {
     console.error("Error connecting to the database:", error);
-  });
+});
 ```
 
 ## License
