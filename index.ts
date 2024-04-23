@@ -2,14 +2,11 @@ import {generateUniqueId} from './helpers/util';
 import Database from './helpers/db';
 import mongoose,{Schema,Connection} from 'mongoose'
 
-
-
 export default class MaskUrl {
   dbString: string;
   urlPrefix: string;
   connection!: Connection | Error;
   database!: Database;
-
 
   constructor(dbString: string, urlPrefix: string) {
     this.dbString = dbString;
@@ -29,6 +26,7 @@ export default class MaskUrl {
         const uniqueId = generateUniqueId();
         const redirectionUrl = `${this.urlPrefix.trim()}/${uniqueId}`;
         const connection = this.connection as mongoose.Connection;
+        //TODO: Move this to db class
         const UrlModel = connection.model('Url', new mongoose.Schema({
             id: String,
             prefix: String,
@@ -53,6 +51,8 @@ export default class MaskUrl {
         const id = _url.split("/").pop();
         console.log(id)
         const connection = this.connection as mongoose.Connection;
+
+        //TODO: Move this to db class
         const UrlModel = connection.model('Url', new mongoose.Schema({
             id: String,
             prefix: String,
@@ -79,5 +79,3 @@ export default class MaskUrl {
 }
 
 module.exports = MaskUrl;
-
-

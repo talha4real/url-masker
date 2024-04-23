@@ -1,8 +1,6 @@
-
-  // helpers/db.ts
-  import mongoose, { Connection,model,Schema } from 'mongoose';
+import mongoose, { Connection,model,Schema } from 'mongoose';
   
-  export default class Database {
+export default class Database {
     private dbString: string;
     connection: Connection | null = null;
     private urlScheme = new Schema({
@@ -30,7 +28,6 @@
         return this._UrlModel;
     }
 
-  
     disconnect(): Promise<void | Error> {
         return new Promise<void | Error>((resolve, reject) => {
           if (!this.connection) {
@@ -40,5 +37,5 @@
           this.connection.close();
         });
       }
-  }
+}
  
